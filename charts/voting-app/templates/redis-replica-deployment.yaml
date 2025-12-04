@@ -1,0 +1,25 @@
+{{- if .Values.redis.enableReadReplica }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis-replica
+  name: redis-replica
+spec:
+  replicas: {{ .Values.redis.readReplicas }}
+  selector:
+    matchLabels:
+      app: redis-replica
+  template:
+    metadata:
+      labels:
+        app: redis-replica
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        command: ["redis-server"]
+        args: ["--replicaof", "redis", "6379"]
+{{- end }}

@@ -1,0 +1,11 @@
+redis:
+  replicas: 3
+
+result:
+  replicas: 3
+
+vote:
+  replicas: 3
+
+worker:
+  replicas: 3

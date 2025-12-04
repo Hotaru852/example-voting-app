@@ -1,0 +1,9 @@
+redis:
+  enableReadReplica: true
+  readReplicas: 2
+
+result:
+  replicas: 2
+
+worker:
+  replicas: 2

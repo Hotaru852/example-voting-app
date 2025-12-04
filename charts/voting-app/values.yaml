@@ -1,0 +1,15 @@
+db:
+  replicas: 1
+
+redis:
+  replicas: 1
+
+result:
+  enableReadReplica: false
+  replicas: 1
+
+vote:
+  replicas: 1
+
+worker:
+  replicas: 1
