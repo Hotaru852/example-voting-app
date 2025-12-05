@@ -23,7 +23,7 @@ spec:
           service:
             name: vote
             port:
-              number: 80
+              number: 8080
   - host: result.kiseki.casa
     http:
       paths:
@@ -33,4 +33,4 @@ spec:
           service:
             name: result
             port:
-              number: 80
+              number: 8081
