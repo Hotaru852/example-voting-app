@@ -1,6 +1,47 @@
-*.pyc
-project.lock.json
-bin/
-obj/
-.vs/
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+.env.local
+*.key
+*.pem
+secrets/
+
+# Build and dependencies
 node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Kubernetes secrets (if generated locally)
+*-secret.yaml
+sealed-secrets/
+
+# Helm
+charts/**/*.tgz
+.helm/
+
+# ArgoCD local state (if any)
+argocd-local/
