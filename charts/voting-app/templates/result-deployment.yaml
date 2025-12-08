@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-result
+  name: result
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/name: result
@@ -25,6 +25,3 @@ spec:
         ports:
         - containerPort: 80
           name: http
-        env:
-        - name: DB_HOST
-          value: {{ .Release.Name }}-db

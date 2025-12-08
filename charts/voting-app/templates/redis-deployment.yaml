@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-redis
+  name: redis
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/name: redis

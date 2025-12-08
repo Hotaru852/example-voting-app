@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-worker
+  name: worker
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/name: worker
@@ -22,8 +22,3 @@ spec:
       containers:
       - image: dockersamples/examplevotingapp_worker
         name: worker
-        env:
-        - name: REDIS_HOST
-          value: {{ .Release.Name }}-redis
-        - name: DB_HOST
-          value: {{ .Release.Name }}-db
