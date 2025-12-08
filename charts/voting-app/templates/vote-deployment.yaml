@@ -26,5 +26,5 @@ spec:
         - containerPort: 80
           name: http
         env:
-        - name: REDIS_HOST
+        - name: {{ .Release.Name }}_REDIS_HOST
           value: {{ .Release.Name }}-redis

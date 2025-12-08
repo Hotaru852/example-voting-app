@@ -26,5 +26,5 @@ spec:
         - containerPort: 80
           name: http
         env:
-        - name: POSTGRES_HOST
+        - name: {{ .Release.Name }}_DB_HOST
           value: {{ .Release.Name }}-db
