@@ -26,5 +26,5 @@ spec:
         - containerPort: 80
           name: http
         env:
-        - name: {{ .Release.Name }}_DB_HOST
+        - name: DB_HOST
           value: {{ .Release.Name }}-db

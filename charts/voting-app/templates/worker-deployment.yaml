@@ -25,5 +25,5 @@ spec:
         env:
         - name: REDIS_HOST
           value: {{ .Release.Name }}-redis
-        - name: POSTGRES_HOST
+        - name: DB_HOST
           value: {{ .Release.Name }}-db
