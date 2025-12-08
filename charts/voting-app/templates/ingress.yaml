@@ -26,7 +26,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Release.Name }}-vote
+            name: vote
             port:
               number: 8080
   - host: result.kiseki.casa
@@ -36,6 +36,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Release.Name }}-result
+            name: result
             port:
               number: 8081
