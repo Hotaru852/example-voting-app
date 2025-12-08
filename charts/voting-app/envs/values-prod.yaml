@@ -1,8 +1,8 @@
 redis:
+  enableReadReplica: true
   replicas: 3
 
 result:
-  enableReadReplica: true
   replicas: 3
 
 vote:
