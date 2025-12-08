@@ -1,19 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ .Release.Name }}-worker
   labels:
-    app: worker
-  name: worker
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: worker
+    component: worker
 spec:
   replicas: {{ .Values.worker.replicas }}
   selector:
     matchLabels:
-      app: worker
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: worker
   template:
     metadata:
       labels:
-        app: worker
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: worker
+        component: worker
     spec:
       containers:
       - image: dockersamples/examplevotingapp_worker
         name: worker
+        env:
+        - name: REDIS_HOST
+          value: {{ .Release.Name }}-redis
+        - name: POSTGRES_HOST
+          value: {{ .Release.Name }}-db

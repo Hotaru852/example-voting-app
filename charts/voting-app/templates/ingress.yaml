@@ -2,7 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
-  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    component: ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -23,7 +26,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: vote
+            name: {{ .Release.Name }}-vote
             port:
               number: 8080
   - host: result.kiseki.casa
@@ -33,6 +36,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: result
+            name: {{ .Release.Name }}-result
             port:
               number: 8081

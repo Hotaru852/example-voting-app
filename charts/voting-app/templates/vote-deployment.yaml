@@ -1,22 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ .Release.Name }}-vote
   labels:
-    app: vote
-  name: vote
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: vote
+    component: vote
 spec:
   replicas: {{ .Values.vote.replicas }}
   selector:
     matchLabels:
-      app: vote
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: vote
   template:
     metadata:
       labels:
-        app: vote
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: vote
+        component: vote
     spec:
       containers:
       - image: dockersamples/examplevotingapp_vote
         name: vote
         ports:
         - containerPort: 80
-          name: vote
+          name: http
+        env:
+        - name: REDIS_HOST
+          value: {{ .Release.Name }}-redis

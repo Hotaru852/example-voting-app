@@ -1,28 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ .Release.Name }}-redis
   labels:
-    app: redis
-  name: redis
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: redis
+    component: redis
 spec:
   replicas: {{ .Values.redis.replicas }}
   selector:
     matchLabels:
-      app: redis
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: redis
   template:
     metadata:
       labels:
-        app: redis
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: redis
+        component: redis
     spec:
       containers:
       - image: redis:alpine
         name: redis
         ports:
         - containerPort: 6379
-          name: redis
+          name: tcp-redis
         volumeMounts:
         - mountPath: /data
           name: redis-data
       volumes:
       - name: redis-data
-        emptyDir: {} 
+        emptyDir: {}

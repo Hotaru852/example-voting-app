@@ -1,22 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ .Release.Name }}-result
   labels:
-    app: result
-  name: result
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: result
+    component: result
 spec:
   replicas: {{ .Values.result.replicas }}
   selector:
     matchLabels:
-      app: result
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: result
   template:
     metadata:
       labels:
-        app: result
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: result
+        component: result
     spec:
       containers:
       - image: dockersamples/examplevotingapp_result
         name: result
         ports:
         - containerPort: 80
-          name: result
+          name: http
+        env:
+        - name: POSTGRES_HOST
+          value: {{ .Release.Name }}-db

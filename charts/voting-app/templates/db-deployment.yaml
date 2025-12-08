@@ -1,18 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: {{ .Release.Name }}-db
   labels:
-    app: db
-  name: db
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: postgres
+    component: db
 spec:
   replicas: {{ .Values.db.replicas }}
   selector:
     matchLabels:
-      app: db
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: db
   template:
     metadata:
       labels:
-        app: db
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: postgres
+        component: db
     spec:
       containers:
       - image: postgres:15-alpine
@@ -24,10 +29,10 @@ spec:
           value: postgres
         ports:
         - containerPort: 5432
-          name: postgres
+          name: tcp-postgres 
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data
       volumes:
       - name: db-data
-        emptyDir: {} 
+        emptyDir: {}
