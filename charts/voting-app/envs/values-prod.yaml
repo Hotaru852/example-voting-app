@@ -1,5 +1,4 @@
 redis:
-  enableReadReplica: true
   replicas: 3
 
 result:
